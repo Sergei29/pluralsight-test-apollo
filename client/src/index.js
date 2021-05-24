@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import {
   ApolloClient,
@@ -8,7 +7,7 @@ import {
   HttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import * as serviceWorker from "./serviceWorker";
+import "./index.css";
 
 const DEV_SERVER_URI = "http://localhost:4000/";
 const PLURALSIGHT_DEV_SERVER_URI = "https://kz1dr.sse.codesandbox.io/";
@@ -28,5 +27,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-serviceWorker.unregister();

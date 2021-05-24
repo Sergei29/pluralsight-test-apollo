@@ -2,18 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 import {
   ApolloClient,
   ApolloProvider,
   HttpLink,
   InMemoryCache,
 } from "@apollo/client";
+import * as serviceWorker from "./serviceWorker";
+
+const DEV_SERVER_URI = "http://localhost:4000/";
+const PLURALSIGHT_DEV_SERVER_URI = "https://kz1dr.sse.codesandbox.io/";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
-    uri: "https://kz1dr.sse.codesandbox.io/",
+    uri: DEV_SERVER_URI,
   }),
 });
 
@@ -26,7 +29,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

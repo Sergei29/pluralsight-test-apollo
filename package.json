@@ -1,0 +1,19 @@
+{
+  "name": "apollo-app-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.24.1",
+    "graphql": "^15.5.0",
+    "nodemon": "^2.0.7"
+  }
+}

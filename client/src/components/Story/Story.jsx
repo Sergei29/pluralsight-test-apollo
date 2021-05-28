@@ -3,7 +3,7 @@ import React from "react";
 const Story = ({ image, name, description }) => {
   return (
     <div className="col-lg-3 col-md-6">
-      <a href="#">
+      <a href="http://some-link-to-resource">
         <div className="crf-story--image">
           <img alt={name} src={image} />
         </div>

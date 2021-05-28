@@ -11,22 +11,22 @@ const Footer = () => (
             </div>
             <ul>
               <li>
-                <a href="#">Contact Us</a>
+                <a href="http://some-link-to-resource">Contact Us</a>
               </li>
               <li>
-                <a href="#">Order Tracker</a>
+                <a href="http://some-link-to-resource">Order Tracker</a>
               </li>
               <li>
-                <a href="#">Returns &amp; Refunds</a>
+                <a href="http://some-link-to-resource">Returns &amp; Refunds</a>
               </li>
               <li>
-                <a href="#">Size Guide</a>
+                <a href="http://some-link-to-resource">Size Guide</a>
               </li>
               <li>
-                <a href="#">Store Locator</a>
+                <a href="http://some-link-to-resource">Store Locator</a>
               </li>
               <li>
-                <a href="#">Site Map</a>
+                <a href="http://some-link-to-resource">Site Map</a>
               </li>
             </ul>
           </div>
@@ -34,25 +34,25 @@ const Footer = () => (
             <div className="crf-footer--header text-primary">Company Info</div>
             <ul>
               <li>
-                <a href="#">About Us</a>
+                <a href="http://some-link-to-resource">About Us</a>
               </li>
               <li>
-                <a href="#">Careers</a>
+                <a href="http://some-link-to-resource">Careers</a>
               </li>
               <li>
-                <a href="#">Press</a>
+                <a href="http://some-link-to-resource">Press</a>
               </li>
               <li>
-                <a href="#">Sustainability</a>
+                <a href="http://some-link-to-resource">Sustainability</a>
               </li>
               <li>
-                <a href="#">Affiliates</a>
+                <a href="http://some-link-to-resource">Affiliates</a>
               </li>
               <li>
-                <a href="#">Students</a>
+                <a href="http://some-link-to-resource">Students</a>
               </li>
               <li>
-                <a href="#">Mobile Apps</a>
+                <a href="http://some-link-to-resource">Mobile Apps</a>
               </li>
             </ul>
           </div>
@@ -62,13 +62,17 @@ const Footer = () => (
             </div>
             <ul>
               <li>
-                <a href="#">Privacy &amp; Security</a>
+                <a href="http://some-link-to-resource">
+                  Privacy &amp; Security
+                </a>
               </li>
               <li>
-                <a href="#">Statement</a>
+                <a href="http://some-link-to-resource">Statement</a>
               </li>
               <li>
-                <a href="#">Terms &amp; Conditions</a>
+                <a href="http://some-link-to-resource">
+                  Terms &amp; Conditions
+                </a>
               </li>
             </ul>
           </div>
@@ -78,19 +82,44 @@ const Footer = () => (
             </div>
             <ul className="d-lg-block d-none d-sm-none">
               <li>
-                <a href="#" className="crf-footer--icon twitter"></a>
+                <a
+                  href="http://some-link-to-resource"
+                  className="crf-footer--icon twitter"
+                >
+                  {" "}
+                </a>
               </li>
               <li>
-                <a href="#" className="crf-footer--icon facebook"></a>
+                <a
+                  href="http://some-link-to-resource"
+                  className="crf-footer--icon facebook"
+                >
+                  {" "}
+                </a>
               </li>
               <li>
-                <a href="#" className="crf-footer--icon pinterest"></a>
+                <a
+                  href="http://some-link-to-resource"
+                  className="crf-footer--icon pinterest"
+                >
+                  {" "}
+                </a>
               </li>
               <li>
-                <a href="#" className="crf-footer--icon instagram"></a>
+                <a
+                  href="http://some-link-to-resource"
+                  className="crf-footer--icon instagram"
+                >
+                  {" "}
+                </a>
               </li>
               <li>
-                <a href="#" className="crf-footer--icon googleplus"></a>
+                <a
+                  href="http://some-link-to-resource"
+                  className="crf-footer--icon googleplus"
+                >
+                  {" "}
+                </a>
               </li>
             </ul>
             <div className="crf-footer--newsletter">
@@ -110,19 +139,44 @@ const Footer = () => (
             <div className="crf-footer--header text-primary">Follow Us</div>
             <ul>
               <li>
-                <a href="#" className="crf-footer--icon twitter"></a>
+                <a
+                  href="http://some-link-to-resource"
+                  className="crf-footer--icon twitter"
+                >
+                  {" "}
+                </a>
               </li>
               <li>
-                <a href="#" className="crf-footer--icon facebook"></a>
+                <a
+                  href="http://some-link-to-resource"
+                  className="crf-footer--icon facebook"
+                >
+                  {" "}
+                </a>
               </li>
               <li>
-                <a href="#" className="crf-footer--icon pinterest"></a>
+                <a
+                  href="http://some-link-to-resource"
+                  className="crf-footer--icon pinterest"
+                >
+                  {" "}
+                </a>
               </li>
               <li>
-                <a href="#" className="crf-footer--icon instagram"></a>
+                <a
+                  href="http://some-link-to-resource"
+                  className="crf-footer--icon instagram"
+                >
+                  {" "}
+                </a>
               </li>
               <li>
-                <a href="#" className="crf-footer--icon googleplus"></a>
+                <a
+                  href="http://some-link-to-resource"
+                  className="crf-footer--icon googleplus"
+                >
+                  {" "}
+                </a>
               </li>
             </ul>
           </div>
@@ -131,7 +185,10 @@ const Footer = () => (
     </div>
     <div className="crf-footer--logo d-flex">
       <div className="container justify-content-start align-items-center d-flex flex-column">
-        <img src="https://www.pluralsight.com/content/dam/pluralsight2/teach/author-tools/carved-rock-fitness/logos/pluralsight-white.png" />
+        <img
+          src="https://www.pluralsight.com/content/dam/pluralsight2/teach/author-tools/carved-rock-fitness/logos/pluralsight-white.png"
+          alt="rock climbing"
+        />
         <div>
           This site is created for demonstrative purposes only and does not
           offer any real products or services.

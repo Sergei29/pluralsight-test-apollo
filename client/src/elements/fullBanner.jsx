@@ -11,7 +11,7 @@ export const fullBanner = (
           <h4>Trail Review</h4>
           <div>Asphalt</div>
           <div>National Park</div>
-          <a className="btn btn-default" href="#">
+          <a className="btn btn-default" href="http://some-link-to-resource">
             See Review
           </a>
         </div>

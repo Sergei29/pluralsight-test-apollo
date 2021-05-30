@@ -4,10 +4,12 @@ import { STORIES_QUERY } from "../../graphql/queries";
 import Story from "../Story/Story";
 
 const Stories = () => {
-  const { loading, error, data } = useQuery(STORIES_QUERY);
+  const { loading, error, data } = useQuery(STORIES_QUERY, {
+    errorPolicy: "all",
+  });
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error!</p>;
+  // if (error) return <p>Error loading data.</p>;
 
   const stories = data?.stories?.map((story) => (
     <Story
@@ -20,6 +22,7 @@ const Stories = () => {
 
   return (
     <div className="container crf-story">
+      {error && <p>Error loading data.</p>}
       <div className="row">{stories}</div>
     </div>
   );

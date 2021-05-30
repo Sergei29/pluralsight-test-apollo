@@ -7,6 +7,7 @@ export const STORIES_QUERY = gql`
       name
       image
       description
+      extra
     }
   }
 `;

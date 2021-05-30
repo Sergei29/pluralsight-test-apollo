@@ -5,7 +5,6 @@ import Story from "../Story/Story";
 
 const Stories = () => {
   const { loading, error, data } = useQuery(STORIES_QUERY);
-  console.log({ error, data });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error!</p>;

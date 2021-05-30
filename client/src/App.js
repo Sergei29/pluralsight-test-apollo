@@ -5,7 +5,7 @@ import Footer from "./components/Footer/Footer";
 import { cigarBanner, heroBanner, fullBanner } from "./elements";
 import "./main.css";
 
-function App() {
+const App = () => {
   return (
     <div className="crf">
       <Header />
@@ -16,6 +16,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

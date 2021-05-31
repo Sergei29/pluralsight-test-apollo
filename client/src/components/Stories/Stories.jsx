@@ -15,7 +15,6 @@ const Stories = () => {
   // if (error) return <p>{defaultMessages.ERROR_LOADING_DATA}</p>;
 
   const handleChangeName = (strId) => (objEvent) => {
-    objEvent.persist();
     setObjStories((prevObjStories) => ({
       ...prevObjStories,
       [strId]: objEvent.target.value,

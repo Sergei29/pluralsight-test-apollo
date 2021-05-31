@@ -8,6 +8,7 @@ const Story = ({
   bIsEditing,
   handleShowEditField,
   strFieldValue,
+  handleEditName,
 }) => {
   return (
     <div className="col-lg-3 col-md-6">
@@ -30,7 +31,9 @@ const Story = ({
               value={strFieldValue}
             />
             <div>
-              <button className="btn btn-secondary">save</button>
+              <button className="btn btn-secondary" onClick={handleEditName}>
+                save
+              </button>
             </div>
           </div>
         )}

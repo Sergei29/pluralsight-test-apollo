@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { STORIES_QUERY } from "../../graphql/queries";
 import { EDIT_STORY_NAME } from "../../graphql/mutations";
-import Story from "../Story/Story";
 import { defaultMessages } from "../../constants";
+import Story from "../Story/Story";
 
 const Stories = () => {
   const [objEditInputs, setObjEditInputs] = useState({});
@@ -12,9 +12,12 @@ const Stories = () => {
   const { loading, error, data } = useQuery(STORIES_QUERY, {
     errorPolicy: "all",
   });
-  const [editStoryNameMutation] = useMutation(EDIT_STORY_NAME, {
-    errorPolicy: "all",
-  });
+  const [editStoryNameMutation, { error: editError }] = useMutation(
+    EDIT_STORY_NAME,
+    {
+      errorPolicy: "all",
+    }
+  );
 
   if (loading) return <p>Loading...</p>;
 
@@ -47,6 +50,7 @@ const Stories = () => {
       handleShowEditField={showEditField(story.id)}
       strFieldValue={objEditInputs[story.id]?.value || ""}
       handleEditName={handleEditName(story.id)}
+      editError={editError}
     />
   ));
 

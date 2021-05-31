@@ -13,6 +13,10 @@ const typeDefs = gql`
   type Query {
     stories: [Story!]!
   }
+
+  type Mutation {
+    editStoryName(id: ID!, name: String!): Story
+  }
 `;
 
 const resolvers = {
@@ -26,6 +30,24 @@ const resolvers = {
   Story: {
     extra: (parent, args, ctx, info) => {
       return new ApolloError("This is not a real field");
+    },
+  },
+  Mutation: {
+    editStoryName: (parent, args, ctx, info) => {
+      const { id, name } = args;
+      const strStories = fs.readFileSync("./stories.json", "utf-8");
+      const arrStories = JSON.parse(strStories);
+      const arrNewStories = arrStories.map((objStory) => {
+        if (objStory.id === id) {
+          return {
+            ...objStory,
+            name,
+          };
+        }
+        return objStory;
+      });
+      fs.writeFileSync("./stories.json", JSON.stringify(arrNewStories));
+      return arrNewStories.find((objStory) => objStory.id === id);
     },
   },
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { STORIES_QUERY } from "../../graphql/queries";
 import Story from "../Story/Story";
+import { defaultMessages } from "../../constants";
 
 const Stories = () => {
   const { loading, error, data } = useQuery(STORIES_QUERY, {
@@ -9,7 +10,7 @@ const Stories = () => {
   });
 
   if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error loading data.</p>;
+  // if (error) return <p>{defaultMessages.ERROR_LOADING_DATA}</p>;
 
   const stories = data?.stories?.map((story) => (
     <Story
@@ -22,7 +23,7 @@ const Stories = () => {
 
   return (
     <div className="container crf-story">
-      {error && <p>Error loading data.</p>}
+      {error && <p>{defaultMessages.ERROR_LOADING_DATA}</p>}
       <div className="row">{stories}</div>
     </div>
   );

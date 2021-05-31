@@ -1,8 +1,10 @@
 import React from "react";
 import { MockedProvider } from "@apollo/client/testing";
+import { GraphQLError } from "graphql";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { STORIES_QUERY } from "../../graphql/queries";
+import { defaultMessages } from "../../constants";
 import Stories from "./Stories";
 
 describe("<Stories/>", () => {
@@ -19,6 +21,7 @@ describe("<Stories/>", () => {
               name: "story 1",
               image: "story-1.jpg",
               description: "story description",
+              extra: "",
             },
           ],
         },
@@ -66,7 +69,50 @@ describe("<Stories/>", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Oups!/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(defaultMessages.ERROR_LOADING_DATA)
+      ).toBeInTheDocument();
+    });
+  });
+
+  it("should display error message AND successful stories", async () => {
+    const arrMocksError = [
+      {
+        request: {
+          query: STORIES_QUERY,
+        },
+        result: {
+          errors: [new GraphQLError("Error with the Apollo server.")],
+          data: {
+            stories: [
+              {
+                id: "1",
+                name: "story 1",
+                image: "story-1.jpg",
+                description: "story description",
+                extra: "",
+              },
+            ],
+          },
+        },
+      },
+    ];
+
+    render(
+      <MockedProvider
+        mocks={arrMocksError}
+        addTypename={false}
+        defaultOptions={{ watchQuery: { errorPolicy: "all" } }}
+      >
+        <Stories />
+      </MockedProvider>
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(defaultMessages.ERROR_LOADING_DATA)
+      ).toBeInTheDocument();
+      expect(screen.getByText(/story 1/i)).toBeInTheDocument();
     });
   });
 });

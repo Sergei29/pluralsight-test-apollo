@@ -6,20 +6,26 @@ import Story from "../Story/Story";
 import { defaultMessages } from "../../constants";
 
 const Stories = () => {
-  const [objStories, setObjStories] = useState({});
+  const [objEditInputs, setObjEditInputs] = useState({});
+  const [objEditState, setObjEditState] = useState({});
+
   const { loading, error, data } = useQuery(STORIES_QUERY, {
     errorPolicy: "all",
   });
 
   if (loading) return <p>Loading...</p>;
-  // if (error) return <p>{defaultMessages.ERROR_LOADING_DATA}</p>;
 
-  const handleChangeName = (strId) => (objEvent) => {
-    setObjStories((prevObjStories) => ({
+  const handleNameChange = (strId) => (objEvent) =>
+    setObjEditInputs((prevObjStories) => ({
       ...prevObjStories,
-      [strId]: objEvent.target.value,
+      [strId]: { value: objEvent.target.value },
     }));
-  };
+
+  const showEditField = (strId) => () =>
+    setObjEditState((prevState) => ({
+      ...prevState,
+      id: strId,
+    }));
 
   const stories = data?.stories?.map((story) => (
     <Story
@@ -27,7 +33,10 @@ const Stories = () => {
       name={story.name}
       image={story.image}
       description={story.description}
-      handleChangeName={handleChangeName(story.id)}
+      handleChangeName={handleNameChange(story.id)}
+      bIsEditing={objEditState.id === story.id}
+      handleShowEditField={showEditField(story.id)}
+      strFieldValue={objEditInputs[story.id]?.value || ""}
     />
   ));
 

@@ -10,7 +10,7 @@ import {
 import "./index.css";
 
 const DEV_SERVER_URI = "http://localhost:4000/";
-// const PLURALSIGHT_DEV_SERVER_URI = "https://e6vuy.sse.codesandbox.io/";
+const PLURALSIGHT_DEV_SERVER_URI = "https://e6vuy.sse.codesandbox.io/";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),

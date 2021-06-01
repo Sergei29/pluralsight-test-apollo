@@ -13,7 +13,7 @@ const Stories = () => {
     errorPolicy: "all",
   });
   const [editStoryNameMutation] = useMutation(EDIT_STORY_NAME, {
-    errorPolicy: "all",
+    onError: () => {},
   });
 
   if (loading) return <p>Loading...</p>;
@@ -39,14 +39,12 @@ const Stories = () => {
   const stories = data?.stories?.map((story) => (
     <Story
       key={story.id}
-      name={story.name}
-      image={story.image}
-      description={story.description}
-      handleChangeName={handleNameChange(story.id)}
+      story={story}
+      handleChangeName={handleNameChange}
       bIsEditing={objEditState.id === story.id}
-      handleShowEditField={showEditField(story.id)}
+      handleShowEditField={showEditField}
       strFieldValue={objEditInputs[story.id]?.value || ""}
-      handleEditName={handleEditName(story.id)}
+      handleEditName={handleEditName}
     />
   ));
 

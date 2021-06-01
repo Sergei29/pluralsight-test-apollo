@@ -2,8 +2,10 @@ import React from "react";
 import { MockedProvider } from "@apollo/client/testing";
 import { GraphQLError } from "graphql";
 import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
 import { STORIES_QUERY } from "../../graphql/queries";
+import { EDIT_STORY_NAME } from "../../graphql/mutations";
 import { defaultMessages } from "../../constants";
 import Stories from "./Stories";
 
@@ -113,6 +115,68 @@ describe("<Stories/>", () => {
         screen.getByText(defaultMessages.ERROR_LOADING_DATA)
       ).toBeInTheDocument();
       expect(screen.getByText(/story 1/i)).toBeInTheDocument();
+    });
+  });
+
+  it.skip("should be able to edit the story name", async () => {
+    let mutationCalled = false;
+    const mocks = [
+      {
+        request: {
+          query: EDIT_STORY_NAME,
+          variables: {
+            id: "1",
+            name: "A new name",
+          },
+        },
+        result: () => {
+          mutationCalled = true;
+          return {
+            data: {
+              editStoryName: {
+                id: "1",
+                name: "A new name",
+              },
+            },
+          };
+        },
+      },
+      {
+        request: {
+          query: STORIES_QUERY,
+        },
+        result: {
+          data: {
+            stories: [
+              {
+                id: "1",
+                name: "story 1",
+                image: "story1.jpg",
+                description: "test description",
+                extra: "",
+              },
+            ],
+          },
+        },
+      },
+    ];
+
+    render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Stories />
+      </MockedProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/story 1/i)).toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByTestId("edit-1"));
+    userEvent.type(screen.getByTestId("input-1"), "A new name");
+    userEvent.click(screen.getByRole("button", { name: /save/i }));
+
+    await waitFor(() => {
+      expect(mutationCalled).toBe(true);
     });
   });
 });

@@ -1,4 +1,5 @@
 import React from "react";
+import { defaultMessages } from "../../constants";
 
 const Story = ({
   bIsEditing,
@@ -7,9 +8,11 @@ const Story = ({
   handleShowEditField,
   story,
   strFieldValue,
+  editError,
 }) => {
   return (
     <div className="col-lg-3 col-md-6">
+      {editError && <p>{defaultMessages.ERROR_EDITING}</p>}
       <div className="crf-story--image">
         <img alt={story.name} src={story.image} />
       </div>

@@ -1,7 +1,13 @@
 import React from "react";
 import { MockedProvider } from "@apollo/client/testing";
 import { GraphQLError } from "graphql";
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+  act,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
 import { STORIES_QUERY } from "../../graphql/queries";
@@ -118,8 +124,12 @@ describe("<Stories/>", () => {
     });
   });
 
-  it.skip("should be able to edit the story name", async () => {
-    let mutationCalled = false;
+  it("should be able to edit the story name", async () => {
+    const editStoryName = jest.fn().mockReturnValue({
+      id: "1",
+      name: "A new name",
+    });
+
     const mocks = [
       {
         request: {
@@ -129,16 +139,8 @@ describe("<Stories/>", () => {
             name: "A new name",
           },
         },
-        result: () => {
-          mutationCalled = true;
-          return {
-            data: {
-              editStoryName: {
-                id: "1",
-                name: "A new name",
-              },
-            },
-          };
+        result: {
+          data: { editStoryName: editStoryName() },
         },
       },
       {
@@ -176,7 +178,60 @@ describe("<Stories/>", () => {
     userEvent.click(screen.getByRole("button", { name: /save/i }));
 
     await waitFor(() => {
-      expect(mutationCalled).toBe(true);
+      expect(editStoryName).toBeCalled();
+    });
+  });
+
+  it("should display an error message when mutation fails", async () => {
+    const mocks = [
+      {
+        request: {
+          query: EDIT_STORY_NAME,
+          variables: {
+            id: "1",
+            name: "A new name",
+          },
+        },
+        result: new Error("mutation error"),
+      },
+      {
+        request: {
+          query: STORIES_QUERY,
+        },
+        result: {
+          data: {
+            stories: [
+              {
+                id: "1",
+                name: "story 1",
+                image: "story1.jpg",
+                description: "test description",
+                extra: "",
+              },
+            ],
+          },
+        },
+      },
+    ];
+
+    render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Stories />
+      </MockedProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/story 1/i)).toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByTestId("edit-1"));
+    userEvent.type(screen.getByTestId("input-1"), "A new name");
+    userEvent.click(screen.getByRole("button", { name: /save/i }));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(defaultMessages.ERROR_EDITING)
+      ).toBeInTheDocument();
     });
   });
 });

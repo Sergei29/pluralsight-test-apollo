@@ -12,9 +12,12 @@ const Stories = () => {
   const { loading, error, data } = useQuery(STORIES_QUERY, {
     errorPolicy: "all",
   });
-  const [editStoryNameMutation] = useMutation(EDIT_STORY_NAME, {
-    onError: () => {},
-  });
+  const [editStoryNameMutation, { error: editError }] = useMutation(
+    EDIT_STORY_NAME,
+    {
+      onError: () => {},
+    }
+  );
 
   if (loading) return <p>Loading...</p>;
 
@@ -45,6 +48,7 @@ const Stories = () => {
       handleShowEditField={showEditField}
       strFieldValue={objEditInputs[story.id]?.value || ""}
       handleEditName={handleEditName}
+      editError={editError}
     />
   ));
 
